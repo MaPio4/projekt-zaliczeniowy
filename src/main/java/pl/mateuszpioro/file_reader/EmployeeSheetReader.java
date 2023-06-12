@@ -11,6 +11,7 @@ import pl.mateuszpioro.employee.Task;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -43,7 +44,7 @@ public class EmployeeSheetReader {
 
         while(row != null) {
             index++;
-            Date date = row.getCell(Configuration.DATE_CELL_INDEX).getDateCellValue();
+            LocalDateTime date = row.getCell(Configuration.DATE_CELL_INDEX).getLocalDateTimeCellValue();
             String title = row.getCell(Configuration.TITLE_CELL_INDEX).getStringCellValue();
             double time = row.getCell(Configuration.TIME_CELL_INDEX).getNumericCellValue();
 

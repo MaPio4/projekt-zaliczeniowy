@@ -18,4 +18,14 @@ public class Employee {
     public ArrayList<EmployeeProject> getProjects() {
         return projects;
     }
+
+    public double getHours() {
+        double hours = 0.0;
+        for(EmployeeProject p : this.getProjects()) {
+            for(Task t : p.getTasks()) {
+                hours += t.getTime();
+            }
+        }
+        return hours;
+    }
 }

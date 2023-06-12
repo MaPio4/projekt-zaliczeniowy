@@ -4,8 +4,14 @@ import pl.mateuszpioro.employee.Employee;
 import pl.mateuszpioro.employee.EmployeeProject;
 import pl.mateuszpioro.employee.Task;
 import pl.mateuszpioro.file_reader.DirectoryEmployeeReader;
+import pl.mateuszpioro.ranking.EmployeeHoursRanking;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Main {
     public static void main(String[] args) {
@@ -13,19 +19,17 @@ public class Main {
 
         try {
             ArrayList<Employee> employees = reader.readAllEmployees("C:\\Users\\Mateusz\\Desktop\\projekt_zaliczeniowy\\reporter-dane\\2012\\01");
-            for (Employee employee : employees) {
-                System.out.println("#Employee: " + employee.getName());
-                for(EmployeeProject p : employee.getProjects()) {
-                    System.out.println("##Project: " + p.getName());
-                    for (Task t : p.getTasks()) {
-                        System.out.println("### Task: " + t.getTitle() + " | " + t.getDate() + " | " + t.getTime());
-                    }
-                }
+            EmployeeHoursRanking hoursRanking = new EmployeeHoursRanking(employees);
+            Employee[] ranking = hoursRanking.getRanking();
+
+            for(int i = 0; i < ranking.length; i++) {
+                System.out.println(i + ". " + ranking[i].getName() + ", hours: " + ranking[i].getHours());
             }
         }
         catch (Exception e) {
             e.printStackTrace();
         }
+
 
     }
 }
