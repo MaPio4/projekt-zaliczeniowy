@@ -2,19 +2,20 @@ package pl.mateuszpioro.employee;
 
 
 import java.time.LocalDate;
+import java.util.Date;
 
 public class Task {
-    private LocalDate date;
+    private Date date;
     private String title;
-    private int time;
+    private double time;
 
-    public Task(LocalDate date, String title, int time) {
+    public Task(Date date, String title, double time) {
         this.date = date;
         this.title = title;
         this.time = time;
     }
 
-    public LocalDate getDate() {
+    public Date getDate() {
         return date;
     }
 
@@ -22,7 +23,7 @@ public class Task {
         return title;
     }
 
-    public int getTime() {
+    public double getTime() {
         return time;
     }
 }

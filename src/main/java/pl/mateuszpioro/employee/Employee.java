@@ -7,9 +7,9 @@ public class Employee {
 
     private ArrayList<Task> tasks;
 
-    public Employee(String name) {
+    public Employee(String name, ArrayList<Task> tasks) {
         this.name = name;
-        tasks = new ArrayList<>();
+        this.tasks = tasks;
     }
 
     public String getName() {
