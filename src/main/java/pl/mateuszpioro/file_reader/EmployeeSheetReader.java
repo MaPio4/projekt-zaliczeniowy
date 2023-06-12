@@ -6,11 +6,11 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import pl.mateuszpioro.config.Configuration;
 import pl.mateuszpioro.employee.Employee;
+import pl.mateuszpioro.employee.EmployeeProject;
 import pl.mateuszpioro.employee.Task;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -20,9 +20,15 @@ public class EmployeeSheetReader {
         try {
             File file = new File(path);
             Workbook wb = WorkbookFactory.create(file);
-            ArrayList<Task> tasks = this.readTasks(wb.getSheet(Configuration.SHEET_NAME));
+            ArrayList<EmployeeProject> projects = new ArrayList<>();
 
-            return new Employee(this.getEmployeeName(file), tasks);
+            for(int i = 0; i < wb.getNumberOfSheets(); i++) {
+                Sheet sheet = wb.getSheetAt(i);
+                ArrayList<Task> tasks = this.readTasks(sheet);
+                projects.add(new EmployeeProject(sheet.getSheetName(), tasks));
+            }
+
+            return new Employee(this.getEmployeeName(file), projects);
         }
         catch(IOException e) {
             e.printStackTrace();
@@ -36,12 +42,13 @@ public class EmployeeSheetReader {
         ArrayList<Task> tasks = new ArrayList<>();
 
         while(row != null) {
+            index++;
             Date date = row.getCell(Configuration.DATE_CELL_INDEX).getDateCellValue();
             String title = row.getCell(Configuration.TITLE_CELL_INDEX).getStringCellValue();
             double time = row.getCell(Configuration.TIME_CELL_INDEX).getNumericCellValue();
 
             tasks.add(new Task(date, title, time));
-            row = sheet.getRow(index++);
+            row = sheet.getRow(index);
         }
 
         return tasks;

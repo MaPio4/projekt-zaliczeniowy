@@ -4,19 +4,18 @@ import java.util.ArrayList;
 
 public class Employee {
     private String name;
+    private ArrayList<EmployeeProject> projects;
 
-    private ArrayList<Task> tasks;
-
-    public Employee(String name, ArrayList<Task> tasks) {
+    public Employee(String name, ArrayList<EmployeeProject> projects) {
         this.name = name;
-        this.tasks = tasks;
+        this.projects = projects;
     }
 
     public String getName() {
         return name;
     }
 
-    public ArrayList<Task> getTasks() {
-        return tasks;
+    public ArrayList<EmployeeProject> getProjects() {
+        return projects;
     }
 }
