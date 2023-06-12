@@ -3,9 +3,9 @@ package pl.mateuszpioro.employee;
 import java.util.Date;
 
 public class Task {
-    private Date date;
-    private String title;
-    private double time;
+    private final Date date;
+    private final String title;
+    private final double time;
 
     public Task(Date date, String title, double time) {
         this.date = date;

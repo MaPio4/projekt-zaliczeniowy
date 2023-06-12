@@ -3,8 +3,8 @@ package pl.mateuszpioro.employee;
 import java.util.ArrayList;
 
 public class Employee {
-    private String name;
-    private ArrayList<EmployeeProject> projects;
+    private final String name;
+    private final ArrayList<EmployeeProject> projects;
 
     public Employee(String name, ArrayList<EmployeeProject> projects) {
         this.name = name;
