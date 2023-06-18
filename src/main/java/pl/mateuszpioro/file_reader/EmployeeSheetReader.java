@@ -5,6 +5,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import pl.mateuszpioro.config.Configuration;
+import pl.mateuszpioro.config.UIMessages;
 import pl.mateuszpioro.employee.Employee;
 import pl.mateuszpioro.employee.EmployeeProject;
 import pl.mateuszpioro.employee.Task;
@@ -13,13 +14,13 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 
 
 public class EmployeeSheetReader {
     public Employee readEmployee(String path) {
         try {
             File file = new File(path);
+
             Workbook wb = WorkbookFactory.create(file);
             ArrayList<EmployeeProject> projects = new ArrayList<>();
 
@@ -32,7 +33,7 @@ public class EmployeeSheetReader {
             return new Employee(this.getEmployeeName(file), projects);
         }
         catch(IOException e) {
-            e.printStackTrace();
+            System.out.println(UIMessages.OPENING_EMPLOYEE_FILE_ERROR + path);
             return null;
         }
     }
@@ -57,8 +58,8 @@ public class EmployeeSheetReader {
 
     private String getEmployeeName(File file) {
         String filename = file.getName();
-        filename = filename.replace("_", " ");
-        filename = filename.replace(".xls", "");
+        filename = filename.replace(Configuration.SEPARATOR, " ");
+        filename = filename.replace(Configuration.FILES_EXTENSION, "");
         return filename;
     }
 }
