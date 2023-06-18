@@ -21,7 +21,7 @@ public class DayHoursRanking extends Ranking implements IRanking<WorkingDateTime
                 for(Task t : p.getTasks()) {
                     WorkingDateTime w = new WorkingDateTime(t.getDate());
                     String key = w.getPolishDayName();
-                    System.out.println(key);
+
                     if(dates.containsKey(key)) {
                         WorkingDateTime existingMonth = dates.get(key);
                         existingMonth.setWorkingHours(existingMonth.getWorkingHours() +  t.getTime());
