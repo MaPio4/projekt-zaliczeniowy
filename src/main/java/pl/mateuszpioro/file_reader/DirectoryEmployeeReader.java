@@ -27,7 +27,7 @@ public class DirectoryEmployeeReader {
             return employees;
         }
 
-        for( File file : files) {
+        for(File file : files) {
             Employee employee = reader.readEmployee(file.getPath());
             if(employee != null) {
                 employees.add(employee);

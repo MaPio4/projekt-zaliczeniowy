@@ -1,19 +1,14 @@
 package pl.mateuszpioro.ranking;
 
 import pl.mateuszpioro.employee.Employee;
-import pl.mateuszpioro.employee.EmployeeProject;
-import pl.mateuszpioro.employee.Task;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
-public class EmployeeHoursRanking implements IRanking<Employee[]> {
-    private ArrayList<Employee> employees;
+public class EmployeeHoursRanking extends Ranking implements IRanking<Employee[]> {
 
     public EmployeeHoursRanking(ArrayList<Employee> employees) {
-        this.employees = employees;
+        super(employees);
     }
-
 
     @Override
     public Employee[] getRanking() {
