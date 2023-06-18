@@ -6,4 +6,5 @@
 
 Java JDK 20
 
-
+# Releases:
+RankingsApp 1.0 -> https://github.com/MaPio4/projekt-zaliczeniowy/releases/tag/1.0
