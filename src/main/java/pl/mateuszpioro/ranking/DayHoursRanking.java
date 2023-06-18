@@ -7,34 +7,33 @@ import pl.mateuszpioro.employee.Task;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class MonthHoursRanking extends Ranking implements IRanking<WorkingDateTime[]> {
-
-    public MonthHoursRanking(ArrayList<Employee> employees) {
+public class DayHoursRanking extends Ranking implements IRanking<WorkingDateTime[]> {
+    public DayHoursRanking(ArrayList<Employee> employees) {
         super(employees);
     }
 
     @Override
     public WorkingDateTime[] getRanking() {
-        HashMap<String, WorkingDateTime> months = new HashMap<>();
+        HashMap<String, WorkingDateTime> dates = new HashMap<>();
 
         for(Employee e : employees) {
             for(EmployeeProject p : e.getProjects()) {
                 for(Task t : p.getTasks()) {
-                    WorkingDateTime month = new WorkingDateTime(t.getDate());
-                    String key = month.getPolishMonthName();
-
-                    if(months.containsKey(key)) {
-                        WorkingDateTime existingMonth = months.get(key);
+                    WorkingDateTime w = new WorkingDateTime(t.getDate());
+                    String key = w.getPolishDayName();
+                    System.out.println(key);
+                    if(dates.containsKey(key)) {
+                        WorkingDateTime existingMonth = dates.get(key);
                         existingMonth.setWorkingHours(existingMonth.getWorkingHours() +  t.getTime());
                     }
                     else {
-                        month.setWorkingHours(t.getTime());
-                        months.put(month.getPolishMonthName(), month);
+                        w.setWorkingHours(t.getTime());
+                        dates.put(w.getPolishDayName(), w);
                     }
                 }
             }
         }
-        return sort(months.values().toArray(new WorkingDateTime[0]));
+        return sort(dates.values().toArray(new WorkingDateTime[0]));
     }
 
     private WorkingDateTime[] sort(WorkingDateTime[] table) {
