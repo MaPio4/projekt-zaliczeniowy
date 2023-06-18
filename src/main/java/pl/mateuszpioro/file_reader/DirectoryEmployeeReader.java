@@ -21,11 +21,8 @@ public class DirectoryEmployeeReader {
             throw new NotDirectoryException(dir.getPath());
         }
 
-        File[] files = dir.listFiles();
-
-        if(files == null) {
-            return employees;
-        }
+        ArrayList<File> files = new ArrayList<>();
+        this.addAllFiles(files, dir);
 
         for(File file : files) {
             Employee employee = reader.readEmployee(file.getPath());
@@ -35,5 +32,21 @@ public class DirectoryEmployeeReader {
         }
 
         return employees;
+    }
+
+    private void addAllFiles(ArrayList<File> foundFiles, File dir) {
+        File[] files = dir.listFiles();
+
+        if(files == null)
+            return;
+
+        for(File f : files) {
+            if(f.isDirectory()) {
+                addAllFiles(foundFiles, f);
+            }
+            else if(f.isFile()) {
+                foundFiles.add(f);
+            }
+        }
     }
 }
